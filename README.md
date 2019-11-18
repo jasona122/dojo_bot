@@ -1,5 +1,5 @@
 # Dojo Bot
 This is a Discord Bot project
 
-##Features:
+Features:
 To be added!
