@@ -1,28 +1,25 @@
-var Discord = require('discord.io');
-var CommandParser = require("./commands.js");
+var Discord = require('discord.js');
 var auth = require('./token/auth.json');
 
 // Initialize Discord Bot
-var bot = new Discord.Client({
-   token: auth.token,
-   autorun: true
-});
+var bot = new Discord.Client();
 
 function isCommand(message, prefix){
     return message[0] === prefix;
 }
 
-bot.on('ready', function (event) {
-    console.log(bot.username + " - " + bot.id);
+bot.on('ready', function () {
+    console.log(bot.user.tag);
     console.log("Connected successfully");
 });
 
-bot.on('message', function (user, userID, channelID, message, event) {
+bot.on('message', function (message) {
     const prefix = "!";
 
-    //TODO: Fix general design
-    if(isCommand(message, prefix)) {
-        CommandParser.parseCommand(bot, user, userID, channelID, message, event);
+    if(message.content === "ping"){
+        message.reply("pong");
     }
 });
+
+bot.login(auth.token);
 
