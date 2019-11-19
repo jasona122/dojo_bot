@@ -1,16 +1,25 @@
 {
   "name": "dojo-bot",
   "version": "1.0.0",
-  "description": "Discord bot project",
-  "main": "server.js",
+  "description": "This is a Discord Bot project",
+  "main": "bot.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasona122/dojo_bot.git"
   },
   "author": "Jason Agustino",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasona122/dojo_bot/issues"
+  },
+  "homepage": "https://github.com/jasona122/dojo_bot#readme",
   "dependencies": {
     "discord.js": "^11.5.1",
-    "winston": "^3.2.1"
+    "http": "0.0.0",
+    "querystring": "^0.2.0",
+    "r2": "^2.0.1"
   }
 }
