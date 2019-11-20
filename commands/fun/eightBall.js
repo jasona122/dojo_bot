@@ -13,6 +13,10 @@ function eightBall(bot, message, args){
 }
 
 module.exports = {
-    description: "Generates a random 8ball response",
+    info: {
+        name: "!8ball",
+        usage: "!8ball Am I a good bot?",
+        description: "Generates a random 8ball response"
+    },
     exec: eightBall
 }

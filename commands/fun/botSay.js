@@ -14,6 +14,10 @@ async function botSay(bot, message, args){
 }
 
 module.exports = {
-    description: "Ask the bot to say something",
+    info:{
+        name: "!say",
+        usage: "!say Hello, world",
+        description: "Ask the bot to say something"
+    },
     exec: botSay
 }

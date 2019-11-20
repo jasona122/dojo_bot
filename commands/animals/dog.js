@@ -1,4 +1,4 @@
-const Animals = require("../animals/animals.js");
+const Animals = require("./animals.js");
 
 async function getDogPic(bot, message, args){
     let dogURL = await Animals.getDog();
@@ -6,6 +6,10 @@ async function getDogPic(bot, message, args){
 }
 
 module.exports = {
-    description: "Get a random dog pic!",
+    info: {
+        name: "!dog",
+        usage: "!dog",
+        description: "Get a random dog pic!"
+    },
     exec: getDogPic
 }

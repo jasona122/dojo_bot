@@ -1,23 +1,36 @@
 const http = require("http");
 let prefix = "!";
 
-//commands declarations
-const ping = require("../commands/ping");
-const getDogPic = require("../commands/dog");
-const getCatPic = require("../commands/cat");
-const eightBall = require("../commands/eightBall");
-const botSay = require("../commands/botSay");
+//all commands
+let commands = require("../commands/commands.js");
 
 function isCommand(message){
     return message[0] === prefix;
 }
 
 const messageCommands = {
-    "ping": ping,
-    "dog": getDogPic,
-    "cat": getCatPic,
-    "8ball": eightBall,
-    "say": botSay
+    "ping": commands.ping,
+    "dog": commands.getDogPic,
+    "cat": commands.getCatPic,
+    "8ball": commands.eightBall,
+    "say": commands.botSay,
+}
+
+function help(bot, message){
+    let helpMessage = "```";
+
+    for(let prop in commands){
+        let commandInfo = commands[prop].info;
+        let info = "";
+        for(let key in commandInfo){
+            info += key + ": " + commandInfo[key];
+            info += "\n";
+        }
+        helpMessage += info + "\n\n";
+    }
+
+    helpMessage += "```"
+    message.channel.send(helpMessage);
 }
 
 module.exports = async function(bot, message){
@@ -25,6 +38,10 @@ module.exports = async function(bot, message){
     if(!isCommand) return;
     let args = message.content.substring(1).split(' ');
     let command = args[0];
+
+    if(command === "help"){
+        return help(bot, message);
+    }
 
     if(!messageCommands[command]){
         return;

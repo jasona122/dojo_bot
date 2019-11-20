@@ -19,6 +19,10 @@ function ping(bot, message, args){
 }
 
 module.exports = {
-    description: "Ping a user multiple times! (Max 5)",
+    info: {
+        name: "!ping",
+        usage: "!ping @user 2",
+        description: "Ping a user multiple times! (Max 5)"
+    },
     exec: ping
 }
