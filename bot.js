@@ -1,5 +1,5 @@
+require("dotenv").config();
 const Discord = require('discord.js');
-const config = require('./config.js');
 const fs = require("fs");
 
 // Initialize Discord Bot
@@ -15,5 +15,5 @@ fs.readdir('./events/', (err, files) => {
     });
 });
 
-bot.login(config.BOT_TOKEN);
+bot.login(process.env.BOT_TOKEN);
 

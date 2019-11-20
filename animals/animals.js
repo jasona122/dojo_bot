@@ -1,6 +1,6 @@
 const r2 = require("r2");
 const querystring = require("querystring");
-const API_KEY = require("../token/auth.json").ANIMAL_API_TOKEN;
+const API_KEY = process.env.ANIMAL_API_TOKEN;
 
 async function loadImage(apiURL){
     let headers = {

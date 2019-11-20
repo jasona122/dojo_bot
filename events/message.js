@@ -1,6 +1,6 @@
 const http = require("http");
 const Animals = require("../animals/animals.js");
-let prefix = require("../config.js").BOT_PREFIX;
+let prefix = "!";
 
 function isCommand(message){
     return message[0] === prefix;
