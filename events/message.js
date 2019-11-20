@@ -23,11 +23,7 @@ function help(bot, message){
 
     for(let prop in commands){
         let commandInfo = commands[prop].info;
-        info = "";
-        for(let key in commandInfo){
-            info += key + ": " + commandInfo[key];
-            info += "\n";
-        }
+        let info = commandInfo.description + "\nExample: " + commandInfo.usage;
         helpMessage.addField(commandInfo.name, info);
     }
 
