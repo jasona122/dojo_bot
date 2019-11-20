@@ -5,7 +5,7 @@ let prefix = "!";
 let commands = require("../commands/commands.js");
 
 function isCommand(message){
-    return message[0] === prefix;
+    return message.content[0] === prefix;
 }
 
 const messageCommands = {
@@ -33,7 +33,7 @@ function help(bot, message){
 
 module.exports = async function(bot, message){
     if(message.author.bot) return;
-    if(!isCommand) return;
+    if(!isCommand(message)) return;
     let args = message.content.substring(1).split(' ');
     let command = args[0];
 
