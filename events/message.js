@@ -1,4 +1,4 @@
-const http = require("http");
+const Discord = require("discord.js");
 let prefix = "!";
 
 //all commands
@@ -17,19 +17,21 @@ const messageCommands = {
 }
 
 function help(bot, message){
-    let helpMessage = "```";
+    let helpMessage = new Discord.RichEmbed()
+        .setColor('#0099ff')
+	    .setTitle("Dojo Bot Commands");
 
     for(let prop in commands){
         let commandInfo = commands[prop].info;
-        let info = "";
+        info = "";
         for(let key in commandInfo){
             info += key + ": " + commandInfo[key];
             info += "\n";
         }
-        helpMessage += info + "\n\n";
+        helpMessage.addField(commandInfo.name, info);
     }
 
-    helpMessage += "```"
+    helpMessage.setFooter("For more information, contact the bot owner @Shelter#7777");
     message.channel.send(helpMessage);
 }
 
