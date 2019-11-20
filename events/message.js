@@ -40,9 +40,6 @@ function ping(bot, message, args){
 
 module.exports = async function(bot, message){
     if(message.author.bot) return;
-    if(message.author.username === "Mcw"){
-        message.channel.send("^ is an fdp");
-    }
     if(!isCommand) return;
     let args = message.content.substring(1).split(' ');
     let command = args[0];
