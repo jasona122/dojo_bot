@@ -3,5 +3,6 @@ module.exports = {
     getDogPic: require("./animals/dog"),
     botSay: require("./fun/botSay"),
     eightBall: require("./fun/eightBall"),
-    ping: require("./fun/ping")
+    ping: require("./fun/ping"),
+    prefix: require("./moderation/changePrefix")
 }

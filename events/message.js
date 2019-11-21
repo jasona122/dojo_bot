@@ -1,11 +1,13 @@
 const Discord = require("discord.js");
-let prefix = "!";
+const AllGuildData = require("../guilds/guildData");
+let InitGuild = require("../utility/initGuildConfig");
 
 //all commands
 let commands = require("../commands/commands.js");
 
 function isCommand(message){
-    return message.content[0] === prefix;
+    let guildConfig = AllGuildData.getGuildConfig(message.guild.id)
+    return message.content && message.content[0] === guildConfig.prefix;
 }
 
 const messageCommands = {
@@ -14,6 +16,7 @@ const messageCommands = {
     "cat": commands.getCatPic,
     "8ball": commands.eightBall,
     "say": commands.botSay,
+    "prefix": commands.prefix
 }
 
 function help(bot, message){
@@ -31,18 +34,21 @@ function help(bot, message){
     message.channel.send(helpMessage);
 }
 
+
 module.exports = async function(bot, message){
     if(message.author.bot) return;
+    if(!message.guild) return;
+    InitGuild.initGuildConfig(message.guild.id); //initialize all data
     if(!isCommand(message)) return;
+
     let args = message.content.substring(1).split(' ');
     let command = args[0];
 
     if(command === "help"){
         return help(bot, message);
     }
-
     if(!messageCommands[command]){
-        return;
+        return; //don't do anything if not a recognized command
     }
 
     messageCommands[command].exec(bot, message, args);
