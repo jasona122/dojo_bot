@@ -5,5 +5,7 @@ module.exports = {
     "8ball": require("./fun/eightBall"),
     "ping": require("./fun/ping"),
     "prefix": require("./moderation/changePrefix"),
-    "dadjoke": require("./fun/dadJokes")
+    "dadjoke": require("./fun/dadJokes"),
+    "addrole": require("./moderation/addRole"),
+    "removerole": require("./moderation/removeRole")
 }
