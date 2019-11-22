@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const AllGuildData = require("../guilds/guildData");
-let InitGuild = require("../utility/initGuildConfig");
 
 //all commands
 let commands = require("../commands/commands.js");
@@ -38,7 +37,7 @@ function help(bot, message){
 module.exports = async function(bot, message){
     if(message.author.bot) return;
     if(!message.guild) return;
-    InitGuild.initGuildConfig(message.guild.id); //initialize all data
+    AllGuildData.initNewGuild(message.guild.id); //initialize guild config if not already initialized
     if(!isCommand(message)) return;
 
     let args = message.content.substring(1).split(' ');
