@@ -9,14 +9,6 @@ function isCommand(message){
     return message.content && message.content[0] === guildConfig.prefix;
 }
 
-const messageCommands = {
-    "ping": commands.ping,
-    "dog": commands.getDogPic,
-    "cat": commands.getCatPic,
-    "8ball": commands.eightBall,
-    "say": commands.botSay,
-    "prefix": commands.prefix
-}
 
 function help(bot, message){
     let helpMessage = new Discord.RichEmbed()
@@ -46,9 +38,9 @@ module.exports = async function(bot, message){
     if(command === "help"){
         return help(bot, message);
     }
-    if(!messageCommands[command]){
+    if(!commands[command]){
         return; //don't do anything if not a recognized command
     }
 
-    messageCommands[command].exec(bot, message, args);
+    commands[command].exec(bot, message, args);
 }
