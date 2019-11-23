@@ -11,6 +11,7 @@ function removeRole(bot, message, args){
     let role = message.guild.roles.find(r => r.name === roleToRemove);
 
     if(!role) return message.channel.send(roleToRemove + " is not a valid role");
+    if(!member.roles.has(role.id)) return message.channel.send("This member does not have the role " + roleToRemove);
     member.removeRole(role).catch(console.error);
     message.channel.send(roleToRemove + " has been removed from " + member);
 }
@@ -19,7 +20,7 @@ module.exports = {
     info:{
         name: "!removerole",
         usage: "!removerole @member role",
-        description: "Removes a named role to a member"
+        description: "Removes a named role from a member"
     },
     exec: removeRole
 }
