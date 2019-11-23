@@ -1,7 +1,8 @@
 async function botSay(bot, message, args){
     let messageToSay = "";
     for(let i = 1; i < args.length; i++){
-        messageToSay += args[i] + " ";
+        let word = args[i];
+        messageToSay += word + " ";
     }
     try{
         await message.delete()

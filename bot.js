@@ -3,7 +3,7 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 // Initialize Discord Bot
-var bot = new Discord.Client();
+var bot = new Discord.Client({disableEveryone: true});
 
 fs.readdir('./events/', (err, files) => {
     files.forEach(file => {
