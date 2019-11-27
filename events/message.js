@@ -1,14 +1,14 @@
 const Discord = require("discord.js");
-const AllGuildData = require("../guilds/guildData");
+let Database = require("../guilds/guildDatabase");
 
 //all commands
 let commands = require("../commands/commands.js");
 
-function isCommand(message){
-    let guildConfig = AllGuildData.getGuildConfig(message.guild.id)
+function isCommand(bot, message){
+    let guildID = message.guild.id;
+    let guildConfig = Database.getGuildPrefix(guildID);
     return message.content && message.content[0] === guildConfig.prefix;
 }
-
 
 function help(bot, message){
     let helpMessage = new Discord.RichEmbed()
@@ -25,12 +25,11 @@ function help(bot, message){
     message.channel.send(helpMessage);
 }
 
-
 module.exports = async function(bot, message){
     if(message.author.bot) return;
     if(!message.guild) return;
-    AllGuildData.initNewGuild(message.guild.id); //initialize guild config if not already initialized
-    if(!isCommand(message)) return;
+    await Database.setDefaultGuild(message.guild.id);
+    if(!isCommand(bot, message)) return;
 
     let args = message.content.substring(1).split(' ');
     let command = args[0];
@@ -41,6 +40,5 @@ module.exports = async function(bot, message){
     if(!commands[command]){
         return; //don't do anything if not a recognized command
     }
-
     commands[command].exec(bot, message, args);
 }

@@ -1,4 +1,4 @@
-let AllGuildData = require("../guilds/guildData");
+const Database = require("../guilds/guildDatabase");
 
 module.exports = function(bot, guild){
     console.log("DojoBot has joined a guild!");
@@ -6,5 +6,5 @@ module.exports = function(bot, guild){
     console.log("Owner tag: " + guild.owner.user.tag);
     console.log("Owner ID: " + guild.ownerID);
 
-    AllGuildData.initNewGuild(guild);
+    Database.setDefaultGuild(message.guild.id);
 }
