@@ -13,13 +13,14 @@ const funCommands = {
 const moderationCommands = {
     "prefix": require("./moderation/changePrefix"),
     "addrole": require("./moderation/addRole"),
-    "removerole": require("./moderation/removeRole") 
+    "removerole": require("./moderation/removeRole"),
+    "addcooldown": require("./moderation/addCooldown")
 }
 
 let commands = {
     ...animalCommands,
     ...funCommands,
     ...moderationCommands
-}
+};
 
 module.exports = commands;

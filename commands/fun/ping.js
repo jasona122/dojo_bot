@@ -1,11 +1,10 @@
-let AllGuildData = require("../../guilds/guildData");
 let cooldowns = require("../../utility/cooldown");
 const cooldownTime = 10;
 
 async function ping(bot, message, args){
     let userToPing = message.mentions.users.first();
     let amountToPing = parseInt(args[2]);
-    let command = "ping";
+    const command = "ping";
 
     if(!userToPing || isNaN(amountToPing)){
         return;

@@ -4,10 +4,10 @@ let Database = require("../guilds/guildDatabase");
 //all commands
 let commands = require("../commands/commands.js");
 
-function isCommand(bot, message){
+async function isCommand(bot, message){
     let guildID = message.guild.id;
-    let guildConfig = Database.getGuildPrefix(guildID);
-    return message.content && message.content[0] === guildConfig.prefix;
+    let guildPrefix = await Database.getGuildPrefix(guildID);
+    return message.content && message.content[0] === guildPrefix;
 }
 
 function help(bot, message){

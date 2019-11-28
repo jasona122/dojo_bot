@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const availableCommands = require("../../commands/commands.js");
+const availableCommands = require("../../commands/commandNames.js");
 const cooldownTimesSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     command: {

@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 // Initialize mongoose database
 let mongoURI = "mongodb+srv://admin:myadminpassword@dojo-bot-db-o59l6.gcp.mongodb.net/guild_config?retryWrites=true&w=majority"
 mongoose.connect(mongoURI, {}, function(err){
-    if(err) console.log(err);
-    console.log("Connected successfully");
+    if(err) return console.log(err);
+    console.log("Connected to Database Successfully");
 });
 
 // Initialize Discord Bot
