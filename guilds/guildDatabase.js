@@ -8,11 +8,9 @@ class GuildDatabase{
     }
 
     async getGuildPrefix(guildID){
-        GuildConfig.findOne({"guildID": guildID}, function(err, guild){
-            if(err) throw err;
-            if(!guild) return "!";
-            return guild.prefix;
-        });
+        let guild = await GuildConfig.findOne({"guildID": guildID});
+        if(!guild) return "!";
+        return guild.prefix;
     }
 
     async changeGuildPrefix(guildID, newPrefix){
@@ -43,19 +41,32 @@ class GuildDatabase{
     }
 
     async getCommandCooldown(guildID, command){
-        GuildConfig.findOne({"guildID": guildID})
-        .populate("cooldownTimes")
-        .exec(function(err, guild){
-            if(err) throw err;
+        let guildData = await GuildConfig.findOne({"guildID": guildID})
+        .populate("cooldownTimes");
+        let cooldowns = guildData.cooldownTimes;
 
-            for(let i = 0; i < guild.cooldownTimes.length; i++){
-                let cooldown = guild.cooldownTimes[i];
-                if(cooldown.command === command){
-                    return cooldown.duration;
-                }
+        for(let i = 0; i < cooldowns; i++){
+            let cooldown = cooldowns[i];
+            if(cooldown.command === command){
+                return cooldown.duration;
             }
-            return false;
-        });
+        }
+        return false;
+    }
+
+    async hasCommandCooldown(guildID, command){
+        let guildData = await GuildConfig.findOne({"guildID": guildID})
+        .populate("cooldownTimes");
+        let cooldowns = guildData.cooldownTimes;
+        console.log(cooldowns);
+
+        for(let i = 0; i < cooldowns.length; i++){
+            let cooldown = cooldowns[i];
+            if(cooldown.command === command){
+                return true;
+            }
+        }
+        return false;
     }
 
     async addCommandCooldown(guildID, command, cooldownTime){
@@ -64,27 +75,17 @@ class GuildDatabase{
         .populate("cooldownTimes")
         .exec(async function(err, guild){
             if(err) throw err;
-            
-            console.log(guild.cooldownTimes);
-            for(let i = 0; i < guild.cooldownTimes.length; i++){
-                let cooldown = guild.cooldownTimes[i];
-                if(cooldown.command === command){
-                    console.log("cooldown already available")
-                    return false; //cooldown is already available
-                }
-            }
 
             let cooldown = new Cooldown({
                 _id: new mongoose.Types.ObjectId(),
                 command: command,
                 duration: cooldownTime
             });
-            console.log(cooldownTime);
 
-            await cooldown.save(function(err, doc){
+            await cooldown.save(async function(err, doc){
                 if(err) throw err;
-                console.log(doc);
                 guild.cooldownTimes.push(doc);
+                await guild.save();
             });
         });
     }
