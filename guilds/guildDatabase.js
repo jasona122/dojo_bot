@@ -14,7 +14,7 @@ class GuildDatabase{
     }
 
     async changeGuildPrefix(guildID, newPrefix){
-        GuildConfig.findOneAndUpdate({"guildID": guildID}, {"prefix": newPrefix},
+        await GuildConfig.findOneAndUpdate({"guildID": guildID}, {"prefix": newPrefix},
         function(err, guild, res){
             if(err) throw err;
         });

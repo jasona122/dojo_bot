@@ -8,7 +8,7 @@ let commands = require("../commands/commands.js");
 async function isCommand(bot, message){
     let guildID = message.guild.id;
     let guildPrefix = await Database.getGuildPrefix(guildID);
-    return message.content && message.content[0] === guildPrefix;
+    return message.content && (message.content[0] === guildPrefix);
 }
 
 function help(bot, message){
@@ -29,8 +29,12 @@ function help(bot, message){
 module.exports = async function(bot, message){
     if(message.author.bot) return;
     if(!message.guild) return;
+
+    console.log(message.guild.name);
+    console.log(message.author.username);
+
     await Database.setDefaultGuild(message.guild.id);
-    if(!isCommand(bot, message)) return;
+    if(!await isCommand(bot, message)) return;
 
     let args = message.content.substring(1).split(' ');
     let command = args[0];

@@ -1,10 +1,13 @@
 let commandNames = require("../commandNames.js");
 let GuildDB = require("../../guilds/guildDatabase");
-let CustomErrors = require("../../utility/customErrors");
 const ONE_YEAR = 8760 * 60 * 60;
 
 
 async function addCooldown(bot, message, args){
+    if(!(message.member.hasPermission(["MANAGE_CHANNELS", "KICK_MEMBERS"]) || message.author.id === "265500824266997760")){
+        return message.reply("You don't have the permissions to do that!");
+    }
+    
     let command = args[1];
     let cooldownTime = parseInt(args[2]);
 

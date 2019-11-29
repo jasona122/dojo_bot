@@ -1,6 +1,6 @@
 let Database = require("../../guilds/guildDatabase");
 
-function changePrefix(bot, message, args){
+async function changePrefix(bot, message, args){
     if(!(message.member.hasPermission(["MANAGE_CHANNELS", "KICK_MEMBERS"]) || message.author.id === "265500824266997760")){
         return message.reply("You don't have the permissions to do that!");
     }
@@ -9,7 +9,7 @@ function changePrefix(bot, message, args){
     if(!newPrefix) return message.channel.send("Cannot have an empty prefix!");
     if(newPrefix.length > 1) return message.channel.send("Prefixes can only have length 1");
 
-    Database.changeGuildPrefix(message.guild.id, newPrefix);
+    await Database.changeGuildPrefix(message.guild.id, newPrefix);
     message.channel.send("Prefix changed to " + newPrefix);
 }
 
