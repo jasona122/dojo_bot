@@ -17,9 +17,8 @@ function hasCooldown(guildID, userID, command){
 
 async function setCooldown(guildID, userID, command){
     //COULD STORE TIMESTAMP TO INDICATE TIME REMAINING
-    
     let cooldownTime = await GuildDB.getCommandCooldown(guildID, command);
-    if(!cooldownTime) return; //no cooldown
+    if(!cooldownTime) return false; //no cooldown
     initCooldown(guildID, command);
 
     cooldowns[guildID][command].add(userID);

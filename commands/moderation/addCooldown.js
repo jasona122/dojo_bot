@@ -1,5 +1,7 @@
 let commandNames = require("../commandNames.js");
 let GuildDB = require("../../guilds/guildDatabase");
+let CustomErrors = require("../../utility/customErrors");
+const ONE_YEAR = 8760 * 60 * 60;
 
 
 async function addCooldown(bot, message, args){
@@ -12,6 +14,7 @@ async function addCooldown(bot, message, args){
     else if(isNaN(cooldownTime)){
         return message.channel.send("Cooldown must be a valid number");
     }
+    if(cooldownTime < 1 || cooldownTime > ONE_YEAR) return message.channel.send("Cooldown time must be between 1 second to 1 year"); //out of bounds
 
     let hasCooldown = await GuildDB.hasCommandCooldown(message.guild.id, command);
 
