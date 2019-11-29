@@ -16,13 +16,15 @@ function hasCooldown(guildID, userID, command){
 }
 
 async function setCooldown(guildID, userID, command){
+    //COULD STORE TIMESTAMP TO INDICATE TIME REMAINING
+    
     let cooldownTime = await GuildDB.getCommandCooldown(guildID, command);
     if(!cooldownTime) return; //no cooldown
     initCooldown(guildID, command);
 
     cooldowns[guildID][command].add(userID);
     setTimeout(function(){
-        cooldowns[guildID][command].remove(userID)
+        cooldowns[guildID][command].delete(userID)
     }, cooldownTime * 1000);
 }
 

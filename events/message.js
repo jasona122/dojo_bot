@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 let Database = require("../guilds/guildDatabase");
+let Cooldown = require("../utility/cooldown");
 
 //all commands
 let commands = require("../commands/commands.js");
@@ -39,6 +40,14 @@ module.exports = async function(bot, message){
     }
     if(!commands[command]){
         return; //don't do anything if not a recognized command
+    }
+    if(Cooldown.hasCooldown(message.guild.id, message.member.id, command)){
+        return message.reply("You can't use this command yet");
+    }
+
+    if(await Database.getCommandCooldown(message.guild.id, command)){
+        //add user to cooldown
+        Cooldown.setCooldown(message.guild.id, message.member.id, command);
     }
     commands[command].exec(bot, message, args);
 }

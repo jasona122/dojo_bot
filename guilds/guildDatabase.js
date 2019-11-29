@@ -45,7 +45,7 @@ class GuildDatabase{
         .populate("cooldownTimes");
         let cooldowns = guildData.cooldownTimes;
 
-        for(let i = 0; i < cooldowns; i++){
+        for(let i = 0; i < cooldowns.length; i++){
             let cooldown = cooldowns[i];
             if(cooldown.command === command){
                 return cooldown.duration;
@@ -58,7 +58,6 @@ class GuildDatabase{
         let guildData = await GuildConfig.findOne({"guildID": guildID})
         .populate("cooldownTimes");
         let cooldowns = guildData.cooldownTimes;
-        console.log(cooldowns);
 
         for(let i = 0; i < cooldowns.length; i++){
             let cooldown = cooldowns[i];
