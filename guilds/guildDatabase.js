@@ -91,12 +91,25 @@ class GuildDatabase{
 
     async updateCooldownTime(guildID, command, newCooldownTime){
         //TODO: IMPLEMENT
-        GuildConfig.findOneAndUpdate({"guildID": guildID})
+        await GuildConfig.findOne({"guildID": guildID})
+        .populate("cooldownTimes")
+        .exec(async function(err, guild){
+            if(err) throw err;
+
+            for(let i = 0; i < guild.cooldownTimes.length; i++){
+                let cooldown = guild.cooldownTimes[i];
+                if(cooldown.command === command){
+                    cooldown.duration = newCooldownTime;
+                    await guild.save();
+                    Cooldown.findOneAndUpdate({"_id": cooldown._id}, {"duration": newCooldownTime}, function(err){
+                        if(err) throw err;
+                    });
+                }
+            }
+        });
     }
 }
 
-
 let guildDB = new GuildDatabase();
-
 module.exports = guildDB;
 

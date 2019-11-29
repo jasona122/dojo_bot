@@ -19,10 +19,11 @@ async function addCooldown(bot, message, args){
     let hasCooldown = await GuildDB.hasCommandCooldown(message.guild.id, command);
 
     if(hasCooldown){
-        return message.channel.send("Cooldown for command " + command + " already exists");
+        await GuildDB.updateCooldownTime(message.guild.id, command, cooldownTime);
     }
-    
-    await GuildDB.addCommandCooldown(message.guild.id, command, cooldownTime);
+    else{
+        await GuildDB.addCommandCooldown(message.guild.id, command, cooldownTime);
+    }
     message.channel.send("Cooldown set for " + command + " at " + cooldownTime + " seconds");
 }
 
