@@ -1,8 +1,9 @@
 const r2 = require("r2");
+const request = require("request");
 const querystring = require("querystring");
 const API_KEY = process.env.ANIMAL_API_TOKEN;
 
-async function loadImage(apiURL){
+async function loadCatDogImage(apiURL){
     let headers = {
         'X-API-KEY': API_KEY,
     }
@@ -25,22 +26,7 @@ async function loadImage(apiURL){
     }
 }
 
-
-async function getCat(){
-    let catAPIURL = "https://api.thecatapi.com/";
-    let catJSON = await loadImage(catAPIURL);
-    return catJSON[0].url;
-}
-
-
-async function getDog(){
-    let dogAPIURL = "https://api.thedogapi.com/";
-    let dogJSON = await loadImage(dogAPIURL);
-    return dogJSON[0].url;
-}
-
 module.exports = {
-    getCat,
-    getDog
+    loadCatDogImage
 };
 

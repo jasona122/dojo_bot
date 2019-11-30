@@ -1,7 +1,13 @@
-const Animals = require("./animals.js");
+const AnimalsUtil = require("./animalsUtil.js");
+const catAPIURL = "https://api.thecatapi.com/";
+
+async function getCat(){
+    let catJSON = await AnimalsUtil.loadCatDogImage(catAPIURL);
+    return catJSON[0].url;
+}
 
 async function getCatPic(bot, message, args){
-    let catURL = await Animals.getCat()
+    let catURL = await getCat();
     message.channel.send(catURL);
 }
 

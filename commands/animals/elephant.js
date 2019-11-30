@@ -23,7 +23,7 @@ module.exports = {
     info: {
         name: "!elephant",
         usage: "!elephant",
-        description: "Get a random elephant pic!"
+        description: "Get a random elephant biography!"
     },
     exec: getElephantPic
 }

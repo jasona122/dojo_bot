@@ -2,6 +2,7 @@
 //used by setting cooldowns to avoid circular dependency
 //fix if better design is found
 let names = {
+    "bird": true,
     "cat": true,
     "dog": true,
     "elephant": true,

@@ -1,4 +1,5 @@
 const animalCommands = {
+    "bird": require("./animals/bird"),
     "cat": require("./animals/cat"),
     "dog": require("./animals/dog"),
     "elephant": require("./animals/elephant"),
