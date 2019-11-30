@@ -90,7 +90,6 @@ class GuildDatabase{
     }
 
     async updateCooldownTime(guildID, command, newCooldownTime){
-        //TODO: IMPLEMENT
         await GuildConfig.findOne({"guildID": guildID})
         .populate("cooldownTimes")
         .exec(async function(err, guild){
@@ -107,6 +106,12 @@ class GuildDatabase{
                 }
             }
         });
+    }
+
+    async getAllCooldowns(guildID){
+        let guild = await GuildConfig.findOne({"guildID": guildID})
+        .populate("cooldownTimes");
+        return guild.cooldownTimes;
     }
 }
 

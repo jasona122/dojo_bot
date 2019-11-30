@@ -33,7 +33,7 @@ async function addCooldown(bot, message, args){
 module.exports = {
     info:{
         name: "!addcooldown",
-        usage: "!addcooldown [command] [cooldown time]",
+        usage: "!addcooldown command 30",
         description: "Adds a cooldown (in seconds) to a given command"
     },
     exec: addCooldown

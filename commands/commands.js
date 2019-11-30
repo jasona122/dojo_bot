@@ -1,6 +1,7 @@
 const animalCommands = {
     "cat": require("./animals/cat"),
-    "dog": require("./animals/dog")
+    "dog": require("./animals/dog"),
+    "elephant": require("./animals/elephant")
 }
 
 const funCommands = {
@@ -14,7 +15,8 @@ const moderationCommands = {
     "prefix": require("./moderation/changePrefix"),
     "addrole": require("./moderation/addRole"),
     "removerole": require("./moderation/removeRole"),
-    "addcooldown": require("./moderation/addCooldown")
+    "addcooldown": require("./moderation/addCooldown"),
+    "listcooldowns": require("./moderation/listCooldowns")
 }
 
 let commands = {

@@ -30,9 +30,6 @@ module.exports = async function(bot, message){
     if(message.author.bot) return;
     if(!message.guild) return;
 
-    console.log(message.guild.name);
-    console.log(message.author.username);
-
     await Database.setDefaultGuild(message.guild.id);
     if(!await isCommand(bot, message)) return;
 
@@ -53,5 +50,11 @@ module.exports = async function(bot, message){
         //add user to cooldown
         Cooldown.setCooldown(message.guild.id, message.member.id, command);
     }
+
+    console.log("New command!");
+    console.log("Guild: " + message.guild.name);
+    console.log("Author: " + message.author.username);
+    console.log("Command: " + message.content + "\n");
+    
     commands[command].exec(bot, message, args);
 }

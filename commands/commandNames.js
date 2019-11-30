@@ -4,6 +4,7 @@
 let names = {
     "cat": true,
     "dog": true,
+    "elephant": true,
     "say": true,
     "8ball": true,
     "ping": true,
@@ -11,6 +12,8 @@ let names = {
     "prefix": true,
     "addrole": true,
     "removerole": true,
+    "addcooldown": true,
+    "listcooldowns": true
 }
 
 module.exports = names;
