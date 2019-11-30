@@ -1,7 +1,8 @@
 const animalCommands = {
     "cat": require("./animals/cat"),
     "dog": require("./animals/dog"),
-    "elephant": require("./animals/elephant")
+    "elephant": require("./animals/elephant"),
+    "fox": require("./animals/fox")
 }
 
 const funCommands = {
@@ -25,4 +26,9 @@ let commands = {
     ...moderationCommands
 };
 
-module.exports = commands;
+module.exports = {
+    animal: animalCommands,
+    fun: funCommands,
+    moderation: moderationCommands,
+    commands: commands
+}

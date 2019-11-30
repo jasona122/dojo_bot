@@ -5,6 +5,7 @@ let names = {
     "cat": true,
     "dog": true,
     "elephant": true,
+    "fox": true,
     "say": true,
     "8ball": true,
     "ping": true,

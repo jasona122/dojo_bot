@@ -1,9 +1,12 @@
-const Discord = require("discord.js");
 let Database = require("../guilds/guildDatabase");
 let Cooldown = require("../utility/cooldown");
+let Embed = require("../utility/generateEmbed");
+
+//command sections
+let CommandSections = require("../commands/commands.js");
 
 //all commands
-let commands = require("../commands/commands.js");
+let commands = require("../commands/commands.js").commands;
 
 async function isCommand(bot, message){
     let guildID = message.guild.id;
@@ -11,19 +14,19 @@ async function isCommand(bot, message){
     return message.content && (message.content[0] === guildPrefix);
 }
 
-function help(bot, message){
-    let helpMessage = new Discord.RichEmbed()
-        .setColor('#0099ff')
-	    .setTitle("Dojo Bot Commands");
+async function help(bot, message){
+    let introEmbed = Embed.regular("Dojo Bot Commands", "Below is the list of commands");
+    let animalEmbed = Embed.commandHelp("Animal Commands", CommandSections.animal, "Animal pics!");
+    let funEmbed = Embed.commandHelp("Fun Commands", CommandSections.fun, "Here is where the fun begins!");
+    let modEmbed = Embed.commandHelp("Moderation Commands", CommandSections.moderation, "Commands to moderate members");
+    let closer = Embed.closer("Thank you for using DojoBot", "Please contact @Shelter#7777 for any further questions. Suggestions and feedbacks are always welcome",
+    "Requested by " + message.member.displayName);
 
-    for(let prop in commands){
-        let commandInfo = commands[prop].info;
-        let info = commandInfo.description + "\nExample: " + commandInfo.usage;
-        helpMessage.addField(commandInfo.name, info);
-    }
-
-    helpMessage.setFooter("For more information, contact the bot owner @Shelter#7777");
-    message.channel.send(helpMessage);
+    await message.channel.send(introEmbed);
+    await message.channel.send(animalEmbed);
+    await message.channel.send(funEmbed);
+    await message.channel.send(modEmbed);
+    await message.channel.send(closer);
 }
 
 module.exports = async function(bot, message){
