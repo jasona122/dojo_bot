@@ -15,7 +15,8 @@ let names = {
     "addrole": true,
     "removerole": true,
     "addcooldown": true,
-    "listcooldowns": true
+    "listcooldowns": true,
+    "kick": true
 }
 
 module.exports = names;

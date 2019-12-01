@@ -1,7 +1,7 @@
 let Database = require("../../guilds/guildDatabase");
 
 async function changePrefix(bot, message, args){
-    if(!(message.member.hasPermission(["MANAGE_CHANNELS", "KICK_MEMBERS"]) || message.author.id === "265500824266997760")){
+    if(!(message.member.hasPermission(["MANAGE_CHANNELS", "MANAGE_GUILD"]) || message.author.id === "265500824266997760")){
         return message.reply("You don't have the permissions to do that!");
     }
     let newPrefix = args[1];

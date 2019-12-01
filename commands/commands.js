@@ -18,7 +18,8 @@ const moderationCommands = {
     "addrole": require("./moderation/addRole"),
     "removerole": require("./moderation/removeRole"),
     "addcooldown": require("./moderation/addCooldown"),
-    "listcooldowns": require("./moderation/listCooldowns")
+    "listcooldowns": require("./moderation/listCooldowns"),
+    "kick": require("./moderation/kick")
 }
 
 let commands = {
