@@ -22,4 +22,4 @@ module.exports = {
         description: "Kick a member from the server"
     },
     exec: kickMember
-}
+}  

@@ -6,5 +6,5 @@ module.exports = function(bot, guild){
     console.log("Owner tag: " + guild.owner.user.tag);
     console.log("Owner ID: " + guild.ownerID);
 
-    Database.setDefaultGuild(message.guild.id);
+    Database.setDefaultGuild(guild.id);
 }

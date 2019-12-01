@@ -10,6 +10,19 @@ function initCooldown(guildID, command){
     }
 }
 
+function createCooldownObj(userID){
+    let currentTime = new Date();
+}
+
+function formatCooldownObjToStr(cooldownObj){
+    return JSON.stringify(cooldownObj);
+}
+
+function getTimestamp(cooldownStr){
+    let cooldownObj = JSON.parse(cooldownStr);
+    return cooldownObj.timestamp;
+}
+
 function hasCooldown(guildID, userID, command){
     initCooldown(guildID, command);
     return cooldowns[guildID][command].has(userID);
