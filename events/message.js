@@ -43,7 +43,8 @@ module.exports = async function(bot, message){
         return; //don't do anything if not a recognized command
     }
     if(Cooldown.hasCooldown(message.guild.id, message.member.id, command)){
-        return message.reply("You can't use this command yet");
+        let timeRemaining = Cooldown.getCooldownTime(message.guild.id, message.member.id, command) / 1000;
+        return message.reply("You can't use this command yet for " + Math.ceil(timeRemaining) + " seconds");
     }
     if(await Database.getCommandCooldown(message.guild.id, command)){
         //add user to cooldown

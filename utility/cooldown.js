@@ -6,26 +6,35 @@ function initCooldown(guildID, command){
         cooldowns[guildID] = {};
     }
     if(!cooldowns[guildID][command]){
-        cooldowns[guildID][command] = new Set();
+        cooldowns[guildID][command] = new Map();
     }
 }
 
-function createCooldownObj(userID){
-    let currentTime = new Date();
+function createCooldownObj(cooldownTime){
+    let currentTime = new Date().getTime();
+    let cooldownObj = {
+        timestamp: currentTime,
+        cooldownTime: cooldownTime
+    };
+    return cooldownObj;
 }
 
-function formatCooldownObjToStr(cooldownObj){
-    return JSON.stringify(cooldownObj);
-}
-
-function getTimestamp(cooldownStr){
-    let cooldownObj = JSON.parse(cooldownStr);
-    return cooldownObj.timestamp;
+function getTimeRemaining(cooldownObj){
+    let currentTime = new Date().getTime();
+    let cooldownEndTime = cooldownObj.timestamp + cooldownObj.cooldownTime;
+    let timeLeft = cooldownEndTime - currentTime; //in milliseconds
+    return timeLeft;
 }
 
 function hasCooldown(guildID, userID, command){
     initCooldown(guildID, command);
     return cooldowns[guildID][command].has(userID);
+}
+
+function getCooldownTime(guildID, userID, command){
+    initCooldown(guildID, command);
+    let cooldownObj = cooldowns[guildID][command].get(userID);
+    return getTimeRemaining(cooldownObj);
 }
 
 async function setCooldown(guildID, userID, command){
@@ -34,13 +43,15 @@ async function setCooldown(guildID, userID, command){
     if(!cooldownTime) return false; //no cooldown
     initCooldown(guildID, command);
 
-    cooldowns[guildID][command].add(userID);
+    let cooldownObj = createCooldownObj(cooldownTime * 1000);
+    cooldowns[guildID][command].set(userID, cooldownObj);
     setTimeout(function(){
-        cooldowns[guildID][command].delete(userID)
+        cooldowns[guildID][command].delete(userID);
     }, cooldownTime * 1000);
 }
 
 module.exports = {
     hasCooldown,
-    setCooldown
+    setCooldown,
+    getCooldownTime
 }
