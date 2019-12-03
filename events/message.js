@@ -39,19 +39,18 @@ module.exports = async function(bot, message){
     let args = message.content.substring(1).split(' ');
     let command = args[0];
 
-    if(command === "help"){
-        return help(bot, message);
-    }
     if(!commands[command]){
         return; //don't do anything if not a recognized command
     }
     if(Cooldown.hasCooldown(message.guild.id, message.member.id, command)){
         return message.reply("You can't use this command yet");
     }
-
     if(await Database.getCommandCooldown(message.guild.id, command)){
         //add user to cooldown
         Cooldown.setCooldown(message.guild.id, message.member.id, command);
+    }
+    if(command === "help"){
+        return help(bot, message);
     }
 
     console.log("New command!");

@@ -25,7 +25,8 @@ const moderationCommands = {
 let commands = {
     ...animalCommands,
     ...funCommands,
-    ...moderationCommands
+    ...moderationCommands,
+    "help": true
 };
 
 module.exports = {
